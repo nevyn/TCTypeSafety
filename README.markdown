@@ -52,14 +52,14 @@ What?!
 
 The syntax for indicating protocol conformance of a variable is the same that you would use for template/generics specialization in other language. Also, the namespace for protocols is separate from the namespace for classes, so we can have a protocol with the same name as a class. So if we implement a protocol with getters and setters that take and return the type that we are interested in, we can get type safety. For example, we can create the protocol <code>MyThing</code> as such:
 
-<code><pre>@protocol MyThing
+<pre><code>@protocol MyThing
 - (MyThing*)typedObjectAtIndex:(NSUInteger)index;
 - (void)addTypedObject:(MyThing*)thing;
-@end</pre></code>
+@end</code></pre>
 
 We then need to add support for these methods to <code>NSArray</code> and <code>NSMutableArray</code>. However, the type we are specializing on is only a compile time hint and does not affect the type of the instance, so in the implementation, we can just say that these return 'id'.
 
-<code><pre>@implementation NSArray (SPTypeSafety)
+<pre><code>@implementation NSArray (SPTypeSafety)
 - (id)typedObjectAtIndex:(NSUInteger)index;
 {
     return [self objectAtIndex:index];
@@ -71,7 +71,7 @@ We then need to add support for these methods to <code>NSArray</code> and <code>
 {
     [self addObject:thing];
 }
-@end</pre></code>
+@end</code></pre>
 
 Tada! Instant type safety.
 
